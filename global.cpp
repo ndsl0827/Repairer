@@ -12,8 +12,10 @@ using namespace std;
 
 QString Global::s_strVersion = "2014";
 QString Global::s_strDatFile = "";
-QString Global::s_strHttpUrl = "http://file.dllescort.com";
-QString Global::s_strSystemUrl = "http://file.dllescort.com/win7_x64_u/";
+//QString Global::s_strHttpUrl = "http://file.dllescort.com";
+//QString Global::s_strSystemUrl = "http://file.dllescort.com/win7_x64_u/";
+QString Global::s_strHttpUrl = "http://61.147.103.19:8089";
+QString Global::s_strSystemUrl = "http://61.147.103.19:8089";
 QString Global::s_strDownloadPath;
 QString Global::s_strSystemDrive;
 bool Global::s_bActive = false;
@@ -281,39 +283,39 @@ QString Global::getSysInfo()
                     {
                         strFile += "vista_x86_b.txt";
                         strInfo += " Business";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/vista_x86_b/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/vista_x86_b/";
                     }
                     //else if (PRODUCT_ENTERPRISE == dwProductType || PRODUCT_ENTERPRISE_N == dwProductType)
                     else if (PRODUCT_ENTERPRISE == dwProductType || 0x0000001B == dwProductType)
                     {
                         strFile += "vista_x86_e.txt";
                         strInfo += " Enterprise";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/vista_x86_e/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/vista_x86_e/";
                     }
                     else if (PRODUCT_HOME_BASIC == dwProductType || PRODUCT_HOME_BASIC_N == dwProductType)
                     {
                         strFile += "vista_x86_hb.txt";
                         strInfo += " Home Basic";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/vista_x86_hb/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/vista_x86_hb/";
                     }
                     //else if (PRODUCT_HOME_PREMIUM == dwProductType || PRODUCT_HOME_PREMIUM_N == dwProductType)
                     else if (PRODUCT_HOME_PREMIUM == dwProductType || 0x0000001A == dwProductType)
                     {
                         strFile += "vista_x86_hp.txt";
                         strInfo += " Home Premium";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/vista_x86_hp/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/vista_x86_hp/";
                     }
                     //else if (PRODUCT_ULTIMATE == dwProductType || PRODUCT_ULTIMATE_N == dwProductType)
                     else if (PRODUCT_ULTIMATE == dwProductType || PRODUCT_ULTIMATE_N == dwProductType)
                     {
                         strFile += "vista_x86_u.txt";
                         strInfo += " Ultimate";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/vista_x86_u/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/vista_x86_u/";
                     }
                     else
                     {
                         strFile += "vista_x86.txt";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/vista_x86/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/vista_x86/";
                     }
                 }
                 else
@@ -324,30 +326,30 @@ QString Global::getSysInfo()
                     {
                         strFile += "vista_x64_b.txt";
                         strInfo += " Business";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/vista_x64_b/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/vista_x64_b/";
                     }
                     else if (PRODUCT_HOME_BASIC == dwProductType || PRODUCT_HOME_BASIC_N == dwProductType)
                     {
                         strFile += "vista_x64_hb.txt";
                         strInfo += " Home Basic";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/vista_x64_hb/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/vista_x64_hb/";
                     }
                     else if (PRODUCT_HOME_PREMIUM == dwProductType || PRODUCT_HOME_PREMIUM_N == dwProductType)
                     {
                         strFile += "vista_x64_hp.txt";
                         strInfo += " Home Premium";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/vista_x64_hp/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/vista_x64_hp/";
                     }
                     else if (PRODUCT_ULTIMATE == dwProductType || PRODUCT_ULTIMATE_N == dwProductType)
                     {
                         strFile += "vista_x86_u.txt";
                         strInfo += " Ultimate";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/vista_x86_u/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/vista_x86_u/";
                     }
                     else
                     {
                         strFile += "vista_x64_hb.txt";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/vista_x64_hb/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/vista_x64_hb/";
                     }
                 } 
             }
@@ -376,30 +378,30 @@ QString Global::getSysInfo()
                     {
                         strFile += "win7_x86_home.txt";
                         strInfo += " Home Basic";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/win7_x86_home/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/win7_x86_home/";
                     }
                     else if (PRODUCT_HOME_PREMIUM == dwProductType || PRODUCT_HOME_PREMIUM_N == dwProductType)
                     {
                         strFile += "win7_x86_home.txt";
                         strInfo += " Home Premium";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/win7_x86_home/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/win7_x86_home/";
                     }
                     else if (PRODUCT_PROFESSIONAL == dwProductType || PRODUCT_PROFESSIONAL_N == dwProductType)
                     {
                         strFile += "win7_x86_pro.txt";
                         strInfo += " Professional";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/win7_x86_pro/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/win7_x86_pro/";
                     }
                     else if (PRODUCT_ULTIMATE == dwProductType || PRODUCT_ULTIMATE_N == dwProductType)
                     {
                         strFile += "win7_x86_u.txt";
                         strInfo += " Ultimate";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/win7_x86_u/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/win7_x86_u/";
                     }
                     else
                     {
                         strFile += "win7_x86.txt";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/win7_x86/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/win7_x86/";
                     }
                 }
                 else
@@ -410,30 +412,30 @@ QString Global::getSysInfo()
                     {
                         strFile += "win7_x64_home.txt";
                         strInfo += " Home Basic";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/win7_x64_home/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/win7_x64_home/";
                     }
                     else if (PRODUCT_HOME_PREMIUM == dwProductType || PRODUCT_HOME_PREMIUM_N == dwProductType)
                     {
                         strFile += "win7_x64_home.txt";
                         strInfo += " Home Premium";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/win7_x64_home/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/win7_x64_home/";
                     }
                     else if (PRODUCT_PROFESSIONAL == dwProductType || PRODUCT_PROFESSIONAL_N == dwProductType)
                     {
                         strFile += "win7_x64_pro.txt";
                         strInfo += " Professional";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/win7_x64_pro/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/win7_x64_pro/";
                     }
                     else if (PRODUCT_ULTIMATE == dwProductType || PRODUCT_ULTIMATE_N == dwProductType)
                     {
                         strFile += "win7_x64_u.txt";
                         strInfo += " Ultimate";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/win7_x64_u/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/win7_x64_u/";
                     }
                     else
                     {
                         strFile += "win7_x64_home.txt";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/win7_x64_home/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/win7_x64_home/";
                     }
                 }
             }
@@ -483,17 +485,17 @@ QString Global::getSysInfo()
                     if (2 == osInfo.wServicePackMajor)
                     {
                         strFile += "xpsp2_x86.txt";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/xpsp2_x86/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/xpsp2_x86/";
                     }
                     else if (3 == osInfo.wServicePackMajor)
                     {
                         strFile += "xpsp3_x86_home.txt";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/xpsp3_x86_home/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/xpsp3_x86_home/";
                     }
                     else
                     {
                         strFile += "xpsp2_x86.txt";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/xpsp2_x86/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/xpsp2_x86/";
                     }
                 }
                 else
@@ -503,17 +505,17 @@ QString Global::getSysInfo()
                     if (2 == osInfo.wServicePackMajor)
                     {
                         strFile += "xpsp2_x86.txt";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/xpsp2_x86/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/xpsp2_x86/";
                     }
                     else if (3 == osInfo.wServicePackMajor)
                     {
                         strFile += "xpsp3_x86.txt";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/xpsp3_x86/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/xpsp3_x86/";
                     }
                     else
                     {
                         strFile += "xpsp2_x86.txt";
-                        Global::s_strSystemUrl = "http://file.dllescort.com/xpsp2_x86/";
+                        Global::s_strSystemUrl = Global::s_strHttpUrl + "/xpsp2_x86/";
                     }
                 }
 
@@ -530,7 +532,7 @@ QString Global::getSysInfo()
                 }
 
                 strFile += "xp_x64.txt";
-                Global::s_strSystemUrl = "http://file.dllescort.com/xp_x64/";
+                Global::s_strSystemUrl = Global::s_strHttpUrl + "/xp_x64/";
             }
         }
         break;
@@ -558,13 +560,13 @@ QString Global::getSysInfo()
                 {
                     strFile += "win8_x86_e.txt";
                     strInfo += " Enterprise";
-                    Global::s_strSystemUrl = "http://file.dllescort.com/win8_x86_e/";
+                    Global::s_strSystemUrl = Global::s_strHttpUrl + "/win8_x86_e/";
                 }
                 else if (PRODUCT_PROFESSIONAL == dwProductType || PRODUCT_PROFESSIONAL == dwProductType)
                 {
                     strFile += "win8_x86_pro.txt";
                     strInfo += " Professional";
-                    Global::s_strSystemUrl = "http://file.dllescort.com/win8_x86_pro/";
+                    Global::s_strSystemUrl = Global::s_strHttpUrl + "/win8_x86_pro/";
                 }
                 else
                 {
@@ -579,18 +581,18 @@ QString Global::getSysInfo()
                 {
                     strFile += "win8_x64_e.txt";
                     strInfo += " Enterprise";
-                    Global::s_strSystemUrl = "http://file.dllescort.com/win8_x64_e/";
+                    Global::s_strSystemUrl = Global::s_strHttpUrl + "/win8_x64_e/";
                 }
                 else if (PRODUCT_PROFESSIONAL == dwProductType || PRODUCT_PROFESSIONAL == dwProductType)
                 {
                     strFile += "win8_x64_pro.txt";
                     strInfo += " Professional";
-                    Global::s_strSystemUrl = "http://file.dllescort.com/win8_x64_pro/";
+                    Global::s_strSystemUrl = Global::s_strHttpUrl + "/win8_x64_pro/";
                 }
                 else
                 {
                     strFile += "win8_x64.txt";
-                    Global::s_strSystemUrl = "http://file.dllescort.com/win8_x64/";
+                    Global::s_strSystemUrl = Global::s_strHttpUrl + "/win8_x64/";
                 }
             }
         }
@@ -619,18 +621,18 @@ QString Global::getSysInfo()
                 {
                     strFile += "win8.1_x86_e.txt";
                     strInfo += " Enterprise";
-                    Global::s_strSystemUrl = "http://file.dllescort.com/win8.1_x86_e/";
+                    Global::s_strSystemUrl = Global::s_strHttpUrl + "/win8.1_x86_e/";
                 }
                 else if (PRODUCT_PROFESSIONAL == dwProductType || PRODUCT_PROFESSIONAL == dwProductType)
                 {
                     strFile += "win8.1_x86_pro.txt";
                     strInfo += " Professional";
-                    Global::s_strSystemUrl = "http://file.dllescort.com/win8.1_x86_pro/";
+                    Global::s_strSystemUrl = Global::s_strHttpUrl + "/win8.1_x86_pro/";
                 }
                 else
                 {
                     strFile += "win8.1_x86_e.txt";
-                    Global::s_strSystemUrl = "http://file.dllescort.com/win8.1_x86_e/";
+                    Global::s_strSystemUrl = Global::s_strHttpUrl + "/win8.1_x86_e/";
                 }
             }
             else
@@ -641,18 +643,18 @@ QString Global::getSysInfo()
                 {
                     strFile += "win8.1_x64_e.txt";
                     strInfo += " Enterprise";
-                    Global::s_strSystemUrl = "http://file.dllescort.com/win8.1_x64_e/";
+                    Global::s_strSystemUrl = Global::s_strHttpUrl + "/win8.1_x64_e/";
                 }
                 else if (PRODUCT_PROFESSIONAL == dwProductType || PRODUCT_PROFESSIONAL == dwProductType)
                 {
                     strFile += "win8.1_x64_pro.txt";
                     strInfo += " Professional";
-                    Global::s_strSystemUrl = "http://file.dllescort.com/win8.1_x64_pro/";
+                    Global::s_strSystemUrl = Global::s_strHttpUrl + "/win8.1_x64_pro/";
                 }
                 else
                 {
                     strFile += "win8.1_x64_e.txt";
-                    Global::s_strSystemUrl = "http://file.dllescort.com/win8.1_x64_e/";
+                    Global::s_strSystemUrl = Global::s_strHttpUrl + "/win8.1_x64_e/";
                 }
             }
         }
