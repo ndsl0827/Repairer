@@ -19,6 +19,10 @@ public:
 
     void timerEvent(QTimerEvent *event);
 
+private:
+    QString getFileRepairUrl(QString strFile);
+    QString getDownloadFilePath(QString strName);
+
 
 signals:
     void sigDownloadFinished( FileListDownload* pDownload, bool bSuccess );  //下载完毕通知UI

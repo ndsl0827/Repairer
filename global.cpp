@@ -540,7 +540,71 @@ QString Global::getSysInfo()
         break;
     }
 
-    if(isWindowsVersion( 6,2 ))
+    //拷贝kernel32.dll到exe目录下，否则获取的版本信息不正确
+    if(!QFile::copy( strSysDir+"\\kernel32.dll", "os.dll" ))
+    {
+        QString strTmp = QString("copy %1 to %2 failed").arg(strSysDir+"\\kernel32.dll").arg("os.dll");
+        qDebug()<<strTmp;
+    }
+    QString strKernel32Version = Tool::getFileVersion("os.dll");
+    int nKernelVersion = strKernel32Version.left(strKernel32Version.indexOf(".")).toInt();
+
+    bool bGetVersion = false;
+
+    //判断win10
+    if(nKernelVersion == 10)
+    {
+        bGetVersion = true;
+
+        strInfo = "Windows 10";
+        strFile += "win10\\";
+
+        if (isSys32Bit())
+        {
+            if( dwProductType == 48 )
+            {
+                strFile += "win10_x86_pro.txt";
+                strInfo += " Professional";
+                Global::s_strSystemUrl = Global::s_strHttpUrl + "/win10_x86_pro/";
+            }
+            else if(dwProductType == 4)
+            {
+                strFile += "win10_x86_e.txt";
+                strInfo += " Enterprise";
+                Global::s_strSystemUrl = Global::s_strHttpUrl + "/win10_x86_e/";
+            }
+            else  //家庭版101
+            {
+                strFile += "win10_x86_h.txt";
+                strInfo += " Home";
+                Global::s_strSystemUrl = Global::s_strHttpUrl + "/win10_x86_e/";
+            }
+        }
+        else
+        {
+            if( dwProductType == 48 )
+            {
+                strFile += "win10_x64_pro.txt";
+                strInfo += " Professional";
+                Global::s_strSystemUrl = Global::s_strHttpUrl + "/win10_x64_pro/";
+            }
+            else if(dwProductType == 4)
+            {
+                strFile += "win10_x64_e.txt";
+                strInfo += " Enterprise";
+                Global::s_strSystemUrl = Global::s_strHttpUrl + "/win10_x64_e/";
+            }
+            else  //家庭版101
+            {
+                strFile += "win10_x64_h.txt";
+                strInfo += " Home";
+                Global::s_strSystemUrl = Global::s_strHttpUrl + "/win10_x64_e/";
+            }
+        }
+    }
+
+
+    if(!bGetVersion and isWindowsVersion( 6,2 ))
     {
         if (VER_NT_WORKSTATION == osInfo.wProductType)  //Windows 8
         {
@@ -982,3 +1046,4 @@ QString Global::readIniData( QString strKey )
 
     return strValue;
 }
+

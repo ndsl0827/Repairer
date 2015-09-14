@@ -42,6 +42,7 @@ public:
     static void saveIniData( QString strKey, QString strValue );
     static QString readIniData( QString strKey );
 
+
 private:
     static bool isKeyUnregistered( QString strKey );
 

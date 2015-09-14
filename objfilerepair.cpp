@@ -87,6 +87,8 @@ void ObjFileRepair::downloadFile( QString strFile )
     strDownload += strName;
     strDownload += ".rar";
 
+    //QString strUrlTmp = getFileRepairUrl(strFile);
+    Global::saveIniData( "LastRepairFile", strFile );
     m_pHttp->downloadFile( strUrl, strDownload );
 }
 
@@ -143,6 +145,8 @@ void ObjFileRepair::downloadFinished( QString strFile, bool bSuccess )
 
     //删除原文件
     Tool::removeFilesinDir(strSaveTmp);
+    //清空FileDownload目录
+    Tool::reomveDir(Global::s_strDownloadPath);
 
     m_lstFiles.push_back(pDownload);
 
@@ -157,6 +161,8 @@ void ObjFileRepair::downloadFinished( QString strFile, bool bSuccess )
     emit sigDownloadFinished(pDownload, true);
 
     qDebug()<<"ObjFileRepair::downloadFinished end";
+
+    Global::saveIniData( "LastRepairFile", "" );
 }
 
 void ObjFileRepair::openFile( int nIndex )
@@ -201,9 +207,46 @@ void ObjFileRepair::init()
         }
     }
 
+    //继续上次下载的文件
+
 }
 
 void ObjFileRepair::timerEvent(QTimerEvent *event)
 {
     m_pHttp->cancelDownload();
+}
+
+QString ObjFileRepair::getFileRepairUrl(QString strFile)
+{
+    QString strUrl = Global::s_strHttpUrl;
+    QString strSuffix = Tool::getFileSuffix(strFile);
+    //QString strFileName = Tool::getFileName();
+    strSuffix.toLower();
+    if( "dll" == strSuffix )
+    {
+        strUrl += "/dll/";
+        strUrl += strFile.at(0);
+        strUrl += "/";
+    }
+    else
+    {
+        strUrl += "/";
+        strUrl += strSuffix;
+        strUrl += "/";
+    }
+    QString strName = Tool::getFileNameWithoutSuffix(strFile);
+    strUrl += strName;
+    strUrl += ".rar";
+
+    return strUrl;
+}
+
+QString ObjFileRepair::getDownloadFilePath(QString strName)
+{
+    QString strDownload = Global::s_strDownloadPath;
+    strDownload += "\\";
+    strDownload += strName;
+    strDownload += ".rar";
+
+    return strDownload;
 }

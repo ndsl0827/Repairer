@@ -13,7 +13,11 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    //QString strVersion = Tool::getFileVersion("c:\\kernel32.dll");
+    //int nf = strVersion.indexOf(".");
+    //int vv = strVersion.left(nf).toInt();
+
+     QApplication a(argc, argv);
 
     //限制只能启动一个进程
     QSharedMemory shared_memory;
