@@ -86,7 +86,7 @@ void FileListItem::CurrentDownloadFile( int nPercentage )
 //    }
     //m_pPbr->setValue(nPercentage);
 
-    qDebug()<<"FileListItem::CurrentDownloadFile:"<<QThread::currentThreadId();
+    //qDebug()<<"FileListItem::CurrentDownloadFile:"<<QThread::currentThreadId();
     sigCurrentDownloadFile( this, nPercentage );
 }
 

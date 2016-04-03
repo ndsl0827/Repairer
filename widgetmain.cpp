@@ -16,6 +16,7 @@ WidgetMain::WidgetMain(QWidget *parent) :
     m_pWidgetHome = new WidgetHome();
     m_pWidgetSystemScan = new WidgetSystemScan();
     m_pWidgetFileRepair = new WidgetFileRepair();
+    m_pWidgetDiskClean = new WidgetDiskClean();
     m_pWidgetOption = new WidgetOption();
     m_pStackWidget = new QStackedWidget(this);
 
@@ -24,6 +25,7 @@ WidgetMain::WidgetMain(QWidget *parent) :
     m_pStackWidget->addWidget(m_pWidgetHome);
     m_pStackWidget->addWidget(m_pWidgetSystemScan);
     m_pStackWidget->addWidget(m_pWidgetFileRepair);
+    m_pStackWidget->addWidget(m_pWidgetDiskClean);
     m_pStackWidget->addWidget(m_pWidgetOption);
 
     //容器背景
@@ -87,6 +89,11 @@ void WidgetMain::changePage( int nCurPage )
     }
         break;
     case 3:
+    {
+        m_pStackWidget->setCurrentWidget(m_pWidgetDiskClean);
+    }
+        break;
+    case 4:
     {
         m_pStackWidget->setCurrentWidget(m_pWidgetOption);
     }

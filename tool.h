@@ -28,6 +28,7 @@ public:
 
     static QString getFileVersion( QString strFile );  //获得文件版本号
     static int getFileSize( QString strFile );  //获得文件大小 单位kb
+    static qint64 getFileSizeByte( QString strFile );  //文件大小 byte
     static bool isFileTypeX86( QString strFile );   //32位返回true，64位返回false
 
     static QString getSystemInfo();

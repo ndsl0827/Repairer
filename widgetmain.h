@@ -11,6 +11,7 @@
 #include "widgetsystemscan.h"
 #include "widgetfilerepair.h"
 #include "widgetoption.h"
+#include "widgetdiskclean.h"
 
 class WidgetMain : public DialogDrop
 {
@@ -36,6 +37,7 @@ private:
     WidgetHome*       m_pWidgetHome;
     WidgetSystemScan* m_pWidgetSystemScan;
     WidgetFileRepair* m_pWidgetFileRepair;
+    WidgetDiskClean*  m_pWidgetDiskClean;
     WidgetOption*     m_pWidgetOption;
     QStackedWidget*   m_pStackWidget;
 

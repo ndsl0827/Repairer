@@ -14,8 +14,10 @@ QString Global::s_strVersion = "2014";
 QString Global::s_strDatFile = "";
 //QString Global::s_strHttpUrl = "http://file.dllescort.com";
 //QString Global::s_strSystemUrl = "http://file.dllescort.com/win7_x64_u/";
-QString Global::s_strHttpUrl = "http://61.147.103.19:8089";
-QString Global::s_strSystemUrl = "http://61.147.103.19:8089";
+//QString Global::s_strHttpUrl = "http://61.147.103.19:8089";
+//QString Global::s_strSystemUrl = "http://61.147.103.19:8089";
+QString Global::s_strHttpUrl = "http://file.dllescort.com";
+QString Global::s_strSystemUrl = "http://file.dllescort.com";
 QString Global::s_strDownloadPath;
 QString Global::s_strSystemDrive;
 bool Global::s_bActive = false;
@@ -558,6 +560,8 @@ QString Global::getSysInfo()
 
         strInfo = "Windows 10";
         strFile += "win10\\";
+
+        Global::s_strProgramDataPath = Global::s_strSystemDrive + "ProgramData";
 
         if (isSys32Bit())
         {

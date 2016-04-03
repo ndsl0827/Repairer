@@ -46,7 +46,9 @@ SOURCES += main.cpp\
     widgetoption.cpp \
     yxyDES2.cpp \
     desmgr.cpp \
-    widgetunregister.cpp
+    widgetunregister.cpp \
+    widgetdiskclean.cpp \
+    objdiskclean.cpp
 
 HEADERS  += \
     widgetfilerepair.h \
@@ -72,7 +74,9 @@ HEADERS  += \
     widgetoption.h \
     yxyDES2.h \
     desmgr.h \
-    widgetunregister.h
+    widgetunregister.h \
+    widgetdiskclean.h \
+    objdiskclean.h
 
 RESOURCES += \
     Res.qrc
@@ -83,4 +87,5 @@ FORMS += \
     widgetsystemscan.ui \
     WidgetHomeSysInfo.ui \
     widgetoption.ui \
-    widgetunregister.ui
+    widgetunregister.ui \
+    widgetdiskclean.ui

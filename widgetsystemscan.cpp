@@ -116,7 +116,7 @@ void WidgetSystemScan::InitControl()
 //    m_pTableWidget->setColumnWidth( 5, 50 );
 
     QStringList headers;
-    headers<<"suffix"<<"path"<<"name"<<" ";
+    headers<<"suffix"<<"name"<<"path"<<" ";
     ui->treeWidget->setHeaderLabels(headers);
     ui->treeWidget->setColumnWidth(0, 70);
     ui->treeWidget->setColumnWidth(1, 220);
@@ -210,7 +210,7 @@ void WidgetSystemScan::updateCurrentCheckFile( QString strFile, int nTotal, int 
 
 void WidgetSystemScan::updateCurrentDownloadFile( FileListItem* pItem, int nPercentage )
 {
-    qDebug()<<"WidgetSystemScan::CurrentDownloadFile:"<<QThread::currentThreadId();
+    //qDebug()<<"WidgetSystemScan::CurrentDownloadFile:"<<QThread::currentThreadId();
     if( 0 == nPercentage )
     {
         pItem->m_pPbr->setRange( 0, 100 );

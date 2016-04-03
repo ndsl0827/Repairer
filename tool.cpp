@@ -433,6 +433,18 @@ int Tool::getFileSize( QString strFile )
     return nSize;
 }
 
+qint64 Tool::getFileSizeByte( QString strFile )
+{
+    QFile file(strFile);
+    if (!file.open(QIODevice::ReadOnly))
+        return 0;
+
+    qint64 nSize = file.size();
+    file.close();
+
+    return nSize;
+}
+
 void Tool::removeFilesinDir(const QString path)
 {
   QDir dir(path);

@@ -361,7 +361,7 @@ void ObjSystemScan::clearLostFile()
 
 void ObjSystemScan::currentDownloadFile( FileListItem* pItem, int nPercentage )
 {
-    qDebug()<<"ObjSystemScan::CurrentDownloadFile:"<<QThread::currentThreadId();
+    //qDebug()<<"ObjSystemScan::CurrentDownloadFile:"<<QThread::currentThreadId();
     emit sigCurrentDownloadFile( pItem, nPercentage );
 }
 

@@ -37,8 +37,8 @@ WidgetLeft::WidgetLeft(QWidget *parent) :
 
     //设置按钮
     QStringList string_list, string_list2;
-    string_list<<":/main/home"<<":/main/pcScan"<<":/main/fileRepair"<<":/main/settings";
-    string_list2<<":/main/home2"<<":/main/pcScan2"<<":/main/fileRepair2"<<":/main/settings2";
+    string_list<<":/main/home"<<":/main/pcScan"<<":/main/fileRepair"<<":/main/diskClean"<<":/main/settings";
+    string_list2<<":/main/home2"<<":/main/pcScan2"<<":/main/fileRepair2"<<":/main/diskClean2"<<":/main/settings2";
 
     QSignalMapper* signal_mapper = new QSignalMapper(this);
     for( int i=0; i<string_list.size(); i++ )

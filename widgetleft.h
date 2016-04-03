@@ -21,9 +21,9 @@ private:
     void setButtonPng( int nIndex );
 
 private:
-    QPushButton* m_pBtn[4];
-    QPixmap m_pixmap[4];
-    QPixmap m_pixmap2[4];
+    QPushButton* m_pBtn[5];
+    QPixmap m_pixmap[5];
+    QPixmap m_pixmap2[5];
     int m_nCurrentButton;
 
     QPushButton* m_pBtnRegister;
