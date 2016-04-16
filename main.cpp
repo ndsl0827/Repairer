@@ -50,6 +50,12 @@ void test()
 
     Global::readIni();
 
+    {
+        QString str = "C:/Documents and Settings/Administrator/Cookies/administrator@114la[1].txt";
+        qDebug()<<str;
+        str.replace("/", "\\");
+        qDebug()<<str;
+    }
 }
 
 void test2()

@@ -17,9 +17,11 @@ public:
     ~WidgetDiskClean();
 
 signals:
-
+    void sigClean();
 
 public slots:
+    void updateCurrentCheckFile(QString strFilePath, CleanItem* pItem);
+    void cleanFinish();
 
 private:
     Ui::WidgetDiskClean *ui;

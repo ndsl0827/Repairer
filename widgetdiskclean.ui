@@ -16,8 +16,8 @@
   <widget class="QPushButton" name="pushButton_disk_clean">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>410</y>
+     <x>620</x>
+     <y>10</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -25,6 +25,34 @@
    <property name="text">
     <string>清理</string>
    </property>
+  </widget>
+  <widget class="QLabel" name="label_diskclean_file">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>20</y>
+     <width>681</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QTreeWidget" name="treeWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>60</y>
+     <width>741</width>
+     <height>531</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string notr="true">1</string>
+    </property>
+   </column>
   </widget>
  </widget>
  <resources/>

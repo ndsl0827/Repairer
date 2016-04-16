@@ -48,7 +48,8 @@ SOURCES += main.cpp\
     desmgr.cpp \
     widgetunregister.cpp \
     widgetdiskclean.cpp \
-    objdiskclean.cpp
+    objdiskclean.cpp \
+    cleanitem.cpp
 
 HEADERS  += \
     widgetfilerepair.h \
@@ -76,7 +77,8 @@ HEADERS  += \
     desmgr.h \
     widgetunregister.h \
     widgetdiskclean.h \
-    objdiskclean.h
+    objdiskclean.h \
+    cleanitem.h
 
 RESOURCES += \
     Res.qrc

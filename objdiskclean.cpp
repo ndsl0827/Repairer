@@ -7,6 +7,38 @@
 ObjDiskClean::ObjDiskClean(QObject *parent) :
     QObject(parent)
 {
+    m_lstCleanSuffix.push_back("*.~*");
+    m_lstCleanSuffix.push_back("*.ALT");
+    m_lstCleanSuffix.push_back("*.FIX");
+    m_lstCleanSuffix.push_back("*.PRV");
+    m_lstCleanSuffix.push_back("*.SYD");
+    m_lstCleanSuffix.push_back("*.$$$");
+    m_lstCleanSuffix.push_back("*.CLN");
+    m_lstCleanSuffix.push_back("*.GID");
+    m_lstCleanSuffix.push_back("*.SAV");
+    m_lstCleanSuffix.push_back("*.tmp");
+    m_lstCleanSuffix.push_back("*.?~?");
+    m_lstCleanSuffix.push_back("*.CYP");
+    m_lstCleanSuffix.push_back("*.LOO");
+    m_lstCleanSuffix.push_back("*.SCO");
+    m_lstCleanSuffix.push_back("*.UMB");
+    m_lstCleanSuffix.push_back("*.B?K");
+    m_lstCleanSuffix.push_back("*.ERR");
+    m_lstCleanSuffix.push_back("*.B?K");
+    m_lstCleanSuffix.push_back("*.OLD");
+    m_lstCleanSuffix.push_back("*.B?K");
+    m_lstCleanSuffix.push_back("*.SLK");
+    m_lstCleanSuffix.push_back("*.UBK");
+    m_lstCleanSuffix.push_back("*.00?");
+    m_lstCleanSuffix.push_back("*.ffa");
+    m_lstCleanSuffix.push_back("*.ffo");
+    m_lstCleanSuffix.push_back("*.ffl");
+    m_lstCleanSuffix.push_back("*.T");
+    m_lstCleanSuffix.push_back("*.ffx");
+    m_lstCleanSuffix.push_back("cpp");
+
+    m_lstCleanFile.push_back("desktop.ini");
+    m_lstCleanFile.push_back("folder.htt");
 }
 
 ObjDiskClean::~ObjDiskClean()
@@ -16,6 +48,8 @@ ObjDiskClean::~ObjDiskClean()
 
 void ObjDiskClean::clean()
 {
+    clearAllItems();
+
     UINT typeDev = 0;
     wchar_t ch[4] = { 'X', ':', '\\', '\0' };
     for( wchar_t c = 'A'; c <= 'Z'; c++ )
@@ -30,6 +64,17 @@ void ObjDiskClean::clean()
             findFiles(strDev);
         }
     }
+
+    for(QList<CleanItem*>::iterator it = m_lstCleanItems.begin(); it != m_lstCleanItems.end(); it++)
+    {
+        qDebug()<<"name:"<<(*it)->m_strName<<"  size:"<<(*it)->m_nTotalSizeKb;
+        for(QList<CleanItem*>::iterator it2 = (*it)->m_lstChild.begin(); it2 != (*it)->m_lstChild.end(); it2++)
+        {
+            qDebug()<<(*it2)->m_strFilePath;
+        }
+    }
+
+    emit(sigCleanFinish());
 }
 
 void ObjDiskClean::findFiles(QString strPath)
@@ -68,16 +113,17 @@ void ObjDiskClean::findFiles(QString strPath)
            }
            else
            {
-                qDebug()<<"find file:"<<fileInfo.fileName();
+                //qDebug()<<"find file:"<<fileInfo.fileName();
 
-                QString strTmp = fileInfo.fileName();
+                QString strTmp = fileInfo.absoluteFilePath();
+                procFile(strTmp);
            }
            i++;
     }
     while(i<list.size());
 }
 
-void ObjDiskClean::addSuffix(QString strSuffix)
+void ObjDiskClean::addCleanSuffix(QString strSuffix)
 {
     if(m_lstCleanSuffix.indexOf(strSuffix.toLower()) != -1)
     {
@@ -85,24 +131,113 @@ void ObjDiskClean::addSuffix(QString strSuffix)
     }
 }
 
-void ObjDiskClean::removeSuffix(QString strSuffix)
+void ObjDiskClean::removeCleanSuffix(QString strSuffix)
 {
-    int iIndex = m_lstCleanSuffix.indexOf(strSuffix.toLower();
+    int iIndex = m_lstCleanSuffix.indexOf(strSuffix.toLower());
     if(iIndex != -1)
     {
         m_lstCleanSuffix.removeAt(iIndex);
     }
 }
 
-void ObjDiskClean::procFile(QString strFile)
+void ObjDiskClean::addCleanFile(QString strFile)
 {
-    QString strSuffix = Tool::getFileSuffix(strFile);
-
-    for(QList<QString>::iterator it = m_lstCleanSuffix.begin(); it == m_lstCleanSuffix.end(); it++)
+    int iIndex = m_lstCleanFile.indexOf(strFile);
+    if(iIndex != -1)
     {
-        if(*it == strSuffix)
-        {
-
-        }
+        m_lstCleanFile.push_back(strFile);
     }
 }
+
+void ObjDiskClean::removeCleanFile(QString strFile)
+{
+    int iIndex = m_lstCleanFile.indexOf(strFile);
+    if(-1 != iIndex)
+    {
+        m_lstCleanFile.removeAt(iIndex);
+    }
+}
+
+void ObjDiskClean::procFile(QString strFilePath)
+{
+    CleanItem* pItem = NULL;
+    QString strCheckSuffix = Tool::getFileSuffix(strFilePath);
+    QString strCheckName = Tool::getFileName(strFilePath);
+
+    for(QList<QString>::iterator it = m_lstCleanSuffix.begin(); it != m_lstCleanSuffix.end(); it++)
+    {
+        if(*it == strCheckSuffix)
+        {
+            pItem = addCleanItem(0, strCheckSuffix, strFilePath);
+            break;
+        }
+    }
+
+    for(QList<QString>::iterator it = m_lstCleanFile.begin(); it != m_lstCleanFile.end(); it++)
+    {
+        if(*it == strCheckName)
+        {
+            pItem = addCleanItem(1, strCheckName, strFilePath);
+            break;
+        }
+    }
+
+    emit(sigUpdateCurrentCheckFile(strFilePath, pItem));
+}
+
+CleanItem* ObjDiskClean::addCleanItem(int nType, QString strName, QString strFilePath)
+{
+    CleanItem* pItemRtn = NULL;
+    BOOL bExist = FALSE;
+    for(QList<CleanItem*>::iterator it = m_lstCleanItems.begin(); it != m_lstCleanItems.end(); it++)
+    {
+        CleanItem* pItem = *it;
+        if((pItem->m_nType == nType) && (pItem->m_strName == strName))
+        {
+            bExist = TRUE;
+            CleanItem* pItemNew = new CleanItem();
+            pItemNew->m_nType = nType;
+            pItemNew->m_strName = strName;
+            pItemNew->m_strFilePath = strFilePath;
+            pItemNew->m_nTotalSizeKb = Tool::getFileSize(strFilePath);
+
+            pItem->m_lstChild.push_back(pItem);
+            pItem->m_nTotalSizeKb += pItemNew->m_nTotalSizeKb;
+
+            pItemRtn = pItemNew;
+
+            break;
+        }
+    }
+
+    if(!bExist)
+    {
+        CleanItem* pItemChild = new CleanItem();
+        pItemChild->m_nType = 1;
+        pItemChild->m_strName = strName;
+        pItemChild->m_strFilePath = strFilePath;
+        pItemChild->m_nTotalSizeKb = Tool::getFileSize(strFilePath);
+
+        CleanItem* pItemNew = new CleanItem();
+        pItemNew->m_nType = 0;
+        pItemNew->m_strName = strName;
+        pItemNew->m_nTotalSizeKb = pItemChild->m_nTotalSizeKb;
+        pItemNew->m_lstChild.push_back(pItemChild);
+
+        m_lstCleanItems.push_back(pItemNew);
+
+        pItemRtn = pItemChild;
+    }
+}
+
+void ObjDiskClean::clearAllItems()
+{
+    for(QList<CleanItem*>::iterator it = m_lstCleanItems.begin(); it != m_lstCleanItems.end(); it++)
+    {
+        CleanItem* pTmp = *it;
+        delete pTmp;
+        pTmp = NULL;
+    }
+    m_lstCleanItems.clear();
+}
+

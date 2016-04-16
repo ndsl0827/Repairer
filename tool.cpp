@@ -20,6 +20,7 @@ void Tool::deleteFile( QString strFile )
 
 QString Tool::getFileName( QString strFullPath )
 {
+    strFullPath = strFullPath.replace("/", "\\");
     int nIndex = strFullPath.lastIndexOf( '\\', -1 );
 
     if( -1 == nIndex )
@@ -33,6 +34,8 @@ QString Tool::getFileName( QString strFullPath )
 
 QString Tool::getFileNameWithoutSuffix( QString strFile )
 {
+    strFile = strFile.replace("/", "\\");
+
     int nIndex1 = strFile.lastIndexOf( '\\', -1 );
     int nIndex2 = strFile.lastIndexOf( '.', -1 );
 
