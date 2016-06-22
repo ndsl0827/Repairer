@@ -5,6 +5,7 @@
 #include <QPushButton>
 #include "objdiskclean.h"
 
+
 namespace Ui {
 class WidgetDiskClean;
 }
@@ -20,7 +21,7 @@ signals:
     void sigClean();
 
 public slots:
-    void updateCurrentCheckFile(QString strFilePath, CleanItem* pItem);
+    void updateCurrentCheckFile(bool bClean, QString strFilePath, CleanItem* pItem);
     void cleanFinish();
 
 private:

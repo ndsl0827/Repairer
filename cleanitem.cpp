@@ -1,5 +1,6 @@
 #include "cleanitem.h"
 
+
 CleanItem::CleanItem(QObject *parent) :
     QObject(parent)
 {

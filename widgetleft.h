@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QPushButton>
 
+
 class WidgetLeft : public QWidget
 {
     Q_OBJECT

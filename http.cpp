@@ -3,6 +3,7 @@
 
 QNetworkAccessManager* Http::s_pNetMgr;
 
+
 qint64 Http::getFileSize(QString url ,int tryTimes)
 {
     qint64 size = -1;

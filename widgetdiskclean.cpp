@@ -7,6 +7,7 @@
 #include <QTreeWidgetItem>
 #include "global.h"
 
+
 WidgetDiskClean::WidgetDiskClean(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::WidgetDiskClean)
@@ -14,6 +15,13 @@ WidgetDiskClean::WidgetDiskClean(QWidget *parent) :
     ui->setupUi(this);
 
     ui->treeWidget->setColumnCount(3);
+    QStringList headers;
+    headers<<"suffix"<<"name"<<"size"<<"path";
+    ui->treeWidget->setHeaderLabels(headers);
+    ui->treeWidget->setColumnWidth(0, 70);
+    ui->treeWidget->setColumnWidth(1, 220);
+    ui->treeWidget->setColumnWidth(2, 40);
+    ui->treeWidget->setColumnWidth(3, 350);
 
 
     m_pObjDiskClean = new ObjDiskClean();
@@ -33,9 +41,14 @@ WidgetDiskClean::~WidgetDiskClean()
     m_pObjDiskClean = NULL;
 }
 
-void WidgetDiskClean::updateCurrentCheckFile(QString strFilePath, CleanItem* pItem)
+void WidgetDiskClean::updateCurrentCheckFile(bool bClean, QString strFilePath, CleanItem* pItem)
 {
     ui->label_diskclean_file->setText(strFilePath);
+
+    if(!bClean)
+    {
+        return;
+    }
 
 
     QList<QTreeWidgetItem*> lst = ui->treeWidget->findItems(pItem->m_strName, Qt::MatchFixedString);
@@ -46,11 +59,20 @@ void WidgetDiskClean::updateCurrentCheckFile(QString strFilePath, CleanItem* pIt
         QStringList title;
         title<<pItem->m_strName;
         pTreeItem = new QTreeWidgetItem(ui->treeWidget, title);
+        QStringList list;
+        list << ""<<""<<"";
+        QTreeWidgetItem *leaf = new QTreeWidgetItem(pTreeItem, list);
+        pTreeItem->addChild(leaf);
     }
     else if(1 == lst.size())
     {
         //添加到父节点下
         pTreeItem = lst.at(0);
+        QStringList list1;
+        list1 << ""<<pItem->m_strName<<QString::number(pItem->m_nTotalSizeKb)<<pItem->m_strFilePath;
+        QTreeWidgetItem *leaf1 = new QTreeWidgetItem(pTreeItem, list1);
+        pTreeItem->addChild(leaf1);
+
     }
     else
     {

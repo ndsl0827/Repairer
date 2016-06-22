@@ -9,6 +9,7 @@
 #include "dlgregisterkey.h"
 #include "widgetunregister.h"
 
+
 WidgetLeft::WidgetLeft(QWidget *parent) :
     QWidget(parent)
 {

@@ -1,6 +1,8 @@
 #ifndef CLEANITEM_H
 #define CLEANITEM_H
 
+
+
 #include <QObject>
 #include <QCheckBox>
 

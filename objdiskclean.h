@@ -6,6 +6,7 @@
 
 class ObjDiskClean : public QObject
 {
+
     Q_OBJECT
 public:
     explicit ObjDiskClean(QObject *parent = 0);
@@ -26,7 +27,7 @@ private:
     void clearAllItems();
 
 signals:
-    void sigUpdateCurrentCheckFile(QString strFilePath, CleanItem* pItem);
+    void sigUpdateCurrentCheckFile(bool bClean, QString strFilePath, CleanItem* pItem);
     void sigCleanFinish();
 
 public slots:
