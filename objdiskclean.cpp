@@ -9,6 +9,7 @@
 ObjDiskClean::ObjDiskClean(QObject *parent) :
     QObject(parent)
 {
+    /*
     //m_lstCleanSuffix.push_back("*.~*");
     m_lstCleanSuffix.push_back("ALT");
     m_lstCleanSuffix.push_back("FIX");
@@ -40,7 +41,10 @@ ObjDiskClean::ObjDiskClean(QObject *parent) :
     m_lstCleanSuffix.push_back("exe");
 
     m_lstCleanFile.push_back("desktop.ini");
-    m_lstCleanFile.push_back("folder.htt");
+    m_lstCleanFile.push_back("folder.htt");*/
+
+    m_lstCleanSuffix.push_back("exe");
+    m_lstCleanSuffix.push_back("txt");
 }
 
 ObjDiskClean::~ObjDiskClean()
@@ -48,7 +52,7 @@ ObjDiskClean::~ObjDiskClean()
 
 }
 
-void ObjDiskClean::clean()
+void ObjDiskClean::scan()
 {
     clearAllItems();
 
@@ -63,12 +67,12 @@ void ObjDiskClean::clean()
             QString strDev = QString::fromWCharArray(ch);
             qDebug()<<"分区："<<strDev<<"开始清理";
 
-            findFiles(strDev);
+            //findFiles(strDev);
         }
     }
 
     //测试文件夹
-    //findFiles("C:\\test");
+    findFiles("C:\\test");
 
     for(QList<CleanItem*>::iterator it = m_lstCleanItems.begin(); it != m_lstCleanItems.end(); it++)
     {
@@ -80,6 +84,11 @@ void ObjDiskClean::clean()
     }
 
     emit(sigCleanFinish());
+}
+
+void ObjDiskClean::clean()
+{
+
 }
 
 void ObjDiskClean::findFiles(QString strPath)
@@ -206,12 +215,14 @@ CleanItem* ObjDiskClean::addCleanItem(int nType, QString strName, QString strFil
         CleanItem* pItem = *it;
         if((pItem->m_nType == nType) && (pItem->m_strName == strName))
         {
+            // 此类型文件已经有父节点
             bExist = TRUE;
             CleanItem* pItemNew = new CleanItem();
             pItemNew->m_nType = nType;
             pItemNew->m_strName = strName;
             pItemNew->m_strFilePath = strFilePath;
             pItemNew->m_nTotalSizeKb = Tool::getFileSize(strFilePath);
+            pItemNew->m_pSuperItem = pItem;
 
             pItem->m_lstChild.push_back(pItem);
             pItem->m_nTotalSizeKb += pItemNew->m_nTotalSizeKb;
@@ -224,6 +235,7 @@ CleanItem* ObjDiskClean::addCleanItem(int nType, QString strName, QString strFil
 
     if(!bExist)
     {
+        // 此类型文件没有父节点，创建父节点
         CleanItem* pItemChild = new CleanItem();
         pItemChild->m_nType = 1;
         pItemChild->m_strName = strName;
@@ -236,7 +248,9 @@ CleanItem* ObjDiskClean::addCleanItem(int nType, QString strName, QString strFil
         pItemNew->m_nTotalSizeKb = pItemChild->m_nTotalSizeKb;
         pItemNew->m_lstChild.push_back(pItemChild);
 
-        m_lstCleanItems.push_back(pItemNew);
+        pItemChild->m_pSuperItem = pItemNew;
+
+        m_lstCleanItems.push_back(pItemChild);
 
         pItemRtn = pItemChild;
     }

@@ -26,6 +26,7 @@ public:
     int m_nTotalSizeKb;
 
     QCheckBox* m_pCheckBox;
+    CleanItem* m_pSuperItem;
 
     QList<CleanItem*> m_lstChild;
 };

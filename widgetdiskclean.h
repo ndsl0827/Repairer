@@ -18,6 +18,7 @@ public:
     ~WidgetDiskClean();
 
 signals:
+    void sigScan();
     void sigClean();
 
 public slots:

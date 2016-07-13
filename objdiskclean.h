@@ -31,6 +31,7 @@ signals:
     void sigCleanFinish();
 
 public slots:
+    void scan();
     void clean();
 
 private:

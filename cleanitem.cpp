@@ -5,6 +5,7 @@ CleanItem::CleanItem(QObject *parent) :
     QObject(parent)
 {
     m_pCheckBox = NULL;
+    m_pSuperItem = NULL;
 }
 
 CleanItem::~CleanItem()
@@ -14,6 +15,8 @@ CleanItem::~CleanItem()
         delete m_pCheckBox;
         m_pCheckBox = NULL;
     }
+
+    m_pSuperItem = NULL;
 
     for(QList<CleanItem*>::iterator it = m_lstChild.begin(); it != m_lstChild.end(); it++)
     {
